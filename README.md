@@ -7,19 +7,17 @@ The project is designed to help users manage their personal finances by tracking
 ---
 
 ## ✨ Features
-
-- User Management
-- Category Management
-- Income & Expense Tracking
-- Monthly Budget Planning
-- Recurring Transactions
-- Parameter Management
-- SQL Server Database
 - Clean Architecture
-- Layered Architecture
+- Repository Pattern
+- Generic Repository
+- Dependency Injection
+- CQRS (Command Query Responsibility Segregation)
+- MediatR
+- FluentValidation
+- ASP.NET Core MVC
 - Entity Framework Core (Code First)
-- Fluent API Configuration
-
+- SQL Server
+- 
 ---
 
 ## 🏗️ Architecture
@@ -79,13 +77,23 @@ Monivo
 
 ## 🚀 Roadmap
 
+## 🚀 Roadmap
+
 - [x] Clean Architecture setup
 - [x] Entity Framework Core integration
 - [x] Database design
 - [x] Fluent API configurations
-- [ ] Repository Pattern
-- [ ] Generic Repository
-- [ ] Service Layer
+- [x] Repository Pattern
+- [x] Generic Repository
+- [x] Service Layer
+- [x] Category CRUD operations
+- [x] CQRS structure
+- [x] MediatR integration
+- [x] FluentValidation integration
+- [ ] AutoMapper integration
+- [ ] Complete CQRS for queries and commands
+- [ ] Global Exception Handling
+- [ ] Result Pattern
 - [ ] Authentication & Authorization
 - [ ] Dashboard
 - [ ] Reports & Analytics
