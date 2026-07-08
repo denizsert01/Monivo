@@ -10,4 +10,19 @@
     <ProjectReference Include="..\Monivo.Domain\Monivo.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Features\Budgets\" />
+    <Folder Include="Features\Categories\Queries\" />
+    <Folder Include="Features\RecurringTransactions\" />
+    <Folder Include="Features\Parameters\" />
+    <Folder Include="Features\Transactions\" />
+    <Folder Include="DependencyInjection\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="14.2.0" />
+  </ItemGroup>
+
 </Project>

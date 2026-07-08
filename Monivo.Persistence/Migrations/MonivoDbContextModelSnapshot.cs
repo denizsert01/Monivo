@@ -285,7 +285,7 @@ namespace Monivo.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Monivo.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Categories")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -298,7 +298,7 @@ namespace Monivo.Persistence.Migrations
             modelBuilder.Entity("Monivo.Domain.Entities.MonthlyBudget", b =>
                 {
                     b.HasOne("Monivo.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("MonthlyBudgets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -309,7 +309,7 @@ namespace Monivo.Persistence.Migrations
             modelBuilder.Entity("Monivo.Domain.Entities.RecurringTransaction", b =>
                 {
                     b.HasOne("Monivo.Domain.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("RecurringTransactions")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -327,7 +327,7 @@ namespace Monivo.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Monivo.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("RecurringTransactions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -344,18 +344,18 @@ namespace Monivo.Persistence.Migrations
             modelBuilder.Entity("Monivo.Domain.Entities.Transaction", b =>
                 {
                     b.HasOne("Monivo.Domain.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Monivo.Domain.Entities.RecurringTransaction", "RecurringTransaction")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("RecurringTransactionId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Monivo.Domain.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -365,6 +365,29 @@ namespace Monivo.Persistence.Migrations
                     b.Navigation("RecurringTransaction");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Monivo.Domain.Entities.Category", b =>
+                {
+                    b.Navigation("RecurringTransactions");
+
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("Monivo.Domain.Entities.RecurringTransaction", b =>
+                {
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("Monivo.Domain.Entities.User", b =>
+                {
+                    b.Navigation("Categories");
+
+                    b.Navigation("MonthlyBudgets");
+
+                    b.Navigation("RecurringTransactions");
+
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }

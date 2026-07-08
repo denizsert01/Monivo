@@ -1,11 +1,25 @@
 using Microsoft.EntityFrameworkCore;
+using Monivo.Application.Abstractions.Repositories;
+using Monivo.Application.Abstractions.Services;
+using Monivo.Application.Features.Categories.Commands.CreateCategory;
 using Monivo.Domain.Entities;
 using Monivo.Persistence.Context;
+using Monivo.Persistence.Repositories;
+using Monivo.Persistence.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(CreateCategoryCommand).Assembly);
+});
 
 // Add db connection string
 builder.Services.AddDbContext<MonivoDbContext>(options =>

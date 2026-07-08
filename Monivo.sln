@@ -17,7 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monivo.Application", "Moniv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monivo.Persistence", "Monivo.Persistence\Monivo.Persistence.csproj", "{07226531-807C-4E30-AD1A-4E152707F692}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monivo.Infrastructure", "Monivı.Infrastructure\Monivo.Infrastructure.csproj", "{FF585709-2A58-4329-8C13-714DA918A2AA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monivo.Infrastructure", "Monivo.Infrastructure\Monivo.Infrastructure.csproj", "{9557CB44-8B96-73FA-0F2E-D22099C89918}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +46,10 @@ Global
 		{07226531-807C-4E30-AD1A-4E152707F692}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07226531-807C-4E30-AD1A-4E152707F692}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07226531-807C-4E30-AD1A-4E152707F692}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF585709-2A58-4329-8C13-714DA918A2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF585709-2A58-4329-8C13-714DA918A2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF585709-2A58-4329-8C13-714DA918A2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF585709-2A58-4329-8C13-714DA918A2AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9557CB44-8B96-73FA-0F2E-D22099C89918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9557CB44-8B96-73FA-0F2E-D22099C89918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9557CB44-8B96-73FA-0F2E-D22099C89918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9557CB44-8B96-73FA-0F2E-D22099C89918}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,7 +60,6 @@ Global
 		{77F429AA-313B-489D-9AE0-D4EA038FED0C} = {29539724-CFDA-4ABB-94A2-5E8136938FB6}
 		{8DEB2856-F4B4-4C4F-9D29-A0B45FE310A4} = {29539724-CFDA-4ABB-94A2-5E8136938FB6}
 		{07226531-807C-4E30-AD1A-4E152707F692} = {C1B84CC1-DC53-4D24-B3DD-EDA934F917EA}
-		{FF585709-2A58-4329-8C13-714DA918A2AA} = {C1B84CC1-DC53-4D24-B3DD-EDA934F917EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3BF1A990-D816-4166-B520-9771151F217F}

@@ -31,6 +31,10 @@ namespace Monivo.Persistence.Configurations
 
             builder.Property(x => x.UpdatedDate)
                    .IsRequired(false);
+
+            builder.HasOne(x => x.User)
+                   .WithMany(x => x.MonthlyBudgets)
+                   .HasForeignKey(x => x.UserId);
         }
     }
 }

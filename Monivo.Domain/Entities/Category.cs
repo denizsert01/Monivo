@@ -1,4 +1,5 @@
 ﻿using Monivo.Domain.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace Monivo.Domain.Entities
 {
@@ -6,6 +7,8 @@ namespace Monivo.Domain.Entities
     {
         public int UserId { get; set; }
 
+        [Required]
+        [StringLength(50)]
         public string CategoryName { get; set; }
 
         public int TypeParameterId { get; set; }  
@@ -13,5 +16,9 @@ namespace Monivo.Domain.Entities
         public User User { get; set; }
 
         public Parameter TypeParameter { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+
+        public ICollection<RecurringTransaction> RecurringTransactions { get; set; } = new List<RecurringTransaction>();
     }
 }

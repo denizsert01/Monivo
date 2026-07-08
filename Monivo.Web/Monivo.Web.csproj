@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Monivo.Application\Monivo.Application.csproj" />
     <ProjectReference Include="..\Monivo.Persistence\Monivo.Persistence.csproj" />
-    <ProjectReference Include="..\Monivı.Infrastructure\Monivo.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -14,5 +14,13 @@ namespace Monivo.Domain.Entities
 
         public string PasswordHash { get; set; }
 
+        // collection properties
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
+
+        public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+
+        public ICollection<RecurringTransaction> RecurringTransactions { get; set; } = new List<RecurringTransaction>();
+
+        public ICollection<MonthlyBudget> MonthlyBudgets { get; set; } = new List<MonthlyBudget>();
     }
 }

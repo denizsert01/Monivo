@@ -34,5 +34,7 @@ namespace Monivo.Domain.Entities
         public Parameter TypeParameter { get; set; }
 
         public Parameter FrequencyParameter { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
 }

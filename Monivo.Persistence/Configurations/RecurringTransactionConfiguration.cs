@@ -43,6 +43,15 @@ namespace Monivo.Persistence.Configurations
 
             builder.Property(x => x.UpdatedDate)
                    .IsRequired(false);
+
+            builder.HasOne(x => x.User)
+                   .WithMany(x => x.RecurringTransactions)
+                   .HasForeignKey(x => x.UserId);
+
+            builder.HasOne(x => x.Category)
+                   .WithMany(x => x.RecurringTransactions)
+                   .HasForeignKey(x => x.CategoryId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
