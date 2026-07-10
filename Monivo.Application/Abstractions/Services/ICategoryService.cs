@@ -1,4 +1,5 @@
-﻿using Monivo.Domain.Entities;
+﻿using Monivo.Application.DTOs.Categories;
+using Monivo.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Monivo.Application.Abstractions.Services
 {
     public interface ICategoryService
     {
-        Task<List<Category>> GetAllAsync();
-        Task<Category?> GetByIdAsync(int id);
-        Task AddAsync(Category category);
-        Task UpdateAsync(Category category);
+        Task<List<CategoryDto>> GetAllAsync();
+        Task<CategoryDto?> GetByIdAsync(int id);
+        Task AddAsync(CreateCategoryDto dto);
+        Task UpdateAsync(UpdateCategoryDto dto);
         Task DeleteAsync(int id);
     }
 }

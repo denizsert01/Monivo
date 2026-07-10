@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Monivo.Application.Abstractions.Repositories;
 using Monivo.Application.Abstractions.Services;
 using Monivo.Application.Features.Categories.Commands.CreateCategory;
-using Monivo.Domain.Entities;
+using Monivo.Application.Mappings;
 using Monivo.Persistence.Context;
 using Monivo.Persistence.Repositories;
 using Monivo.Persistence.Services;
@@ -12,9 +13,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<GeneralMapping>();
+});
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
 builder.Services.AddMediatR(cfg =>
 {

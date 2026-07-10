@@ -2,6 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Monivo.Application.Abstractions.Services;
 using Monivo.Application.Features.Categories.Commands.CreateCategory;
+using Monivo.Application.Features.Categories.Commands.DeleteCategory;
+using Monivo.Application.Features.Categories.Commands.UpdateCategory;
+using Monivo.Application.Features.Categories.Queries;
+using Monivo.Application.Features.Categories.Queries.GetAllCategories;
 using Monivo.Domain.Entities;
 using System.Threading.Tasks;
 
@@ -20,7 +24,7 @@ namespace Monivo.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllAsync();
+            var categories = await _mediator.Send(new GetAllCategoriesQuery());
             return View(categories);
         }
 
@@ -50,12 +54,12 @@ namespace Monivo.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Category category)
+        public async Task<IActionResult> Edit(UpdateCategoryCommand command)
         {
             if (!ModelState.IsValid)
-                return View(category);
+                return View(command);
 
-            await _categoryService.UpdateAsync(category);
+            await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Delete(int id)
@@ -72,7 +76,7 @@ namespace Monivo.Web.Controllers
         [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _categoryService.DeleteAsync(id);
+            await _mediator.Send(new DeleteCategoryCommand { Id = id});
             return RedirectToAction(nameof(Index));
         }
     }
