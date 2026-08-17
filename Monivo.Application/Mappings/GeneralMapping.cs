@@ -11,7 +11,7 @@ namespace Monivo.Application.Mappings
     {
         public GeneralMapping()
         {
-            CreateMap<Category, Features.Categories.Queries.GetAllCategories.CategoryDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Category, CreateCategoryDto>().ReverseMap();
             CreateMap<Category, UpdateCategoryDto>().ReverseMap();
             CreateMap<CreateCategoryCommand, Category>().ReverseMap();

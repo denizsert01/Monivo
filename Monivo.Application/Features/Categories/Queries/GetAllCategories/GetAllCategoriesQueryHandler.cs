@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Monivo.Application.Abstractions.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Monivo.Application.DTOs.Categories;
 
 namespace Monivo.Application.Features.Categories.Queries.GetAllCategories
 {

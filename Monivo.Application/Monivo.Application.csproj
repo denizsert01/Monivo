@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Budgets\" />
-    <Folder Include="Features\Categories\Queries\" />
     <Folder Include="Features\RecurringTransactions\" />
     <Folder Include="Features\Parameters\" />
     <Folder Include="Features\Transactions\" />
