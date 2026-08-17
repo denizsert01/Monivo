@@ -11,5 +11,7 @@ namespace Monivo.Application.Features.Categories.Commands.UpdateCategory
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
+        public int UserId { get; set; }
+        public int TypeParameterId { get; set; }
     }
 }

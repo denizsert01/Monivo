@@ -19,12 +19,15 @@ namespace Monivo.Application.Features.Categories.Commands.DeleteCategory
 
         public async Task Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = await _categoryRepository.GetByIdAsync(request.Id);
+            var category = await _categoryRepository.GetByIdAndUserIdAsync(request.Id, request.UserId);
 
-            if (category is null)
-                return;
+
+            if (category == null)
+                throw new UnauthorizedAccessException(
+                    "You are not authorized to delete this category.");
 
             _categoryRepository.Delete(category);
+
             await _categoryRepository.SaveChangesAsync();
         }
     }

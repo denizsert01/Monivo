@@ -6,7 +6,7 @@ namespace Monivo.Web.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Monivo is running successfully! 🚀");
+            return View();
         }
     }
 }

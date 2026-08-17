@@ -22,6 +22,7 @@ namespace Monivo.Application.Features.Categories.Commands.CreateCategory
 
             await _categoryRepository.AddAsync(category);
             await _categoryRepository.SaveChangesAsync();
+
         }
     }
 }

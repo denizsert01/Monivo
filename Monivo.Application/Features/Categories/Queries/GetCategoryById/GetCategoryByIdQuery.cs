@@ -11,10 +11,12 @@ namespace Monivo.Application.Features.Categories.Queries.GetCategoryById
     public class GetCategoryByIdQuery : IRequest<CategoryDto>
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
 
-        public GetCategoryByIdQuery(int id)
+        public GetCategoryByIdQuery(int id, int userId)
         {
             Id = id;
+            UserId = userId;
         }
     }
 }

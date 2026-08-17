@@ -16,13 +16,16 @@ namespace Monivo.Application.Features.Categories.Commands.UpdateCategory
 
         public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var category = await _categoryRepository.GetByIdAsync(request.Id);
+            var category = await _categoryRepository.GetByIdAndUserIdAsync(request.Id, request.UserId);
 
-            if (category is null)
-                return;
+            if (category == null)
+                throw new UnauthorizedAccessException(
+                    "You are not authorized to update this category.");
 
             _mapper.Map(request, category);
+
             _categoryRepository.Update(category);
+
             await _categoryRepository.SaveChangesAsync();
         }
     }

@@ -1,4 +1,4 @@
-﻿@model Monivo.Application.Features.Categories.Commands.UpdateCategory.UpdateCategoryCommand
+﻿@model Monivo.Web.ViewModels.Categories.EditCategoryViewModel
 
 @{
     ViewData["Title"] = "Edit Category";
@@ -13,6 +13,21 @@
         <label asp-for="CategoryName" class="form-label"></label>
         <input asp-for="CategoryName" class="form-control" />
         <span asp-validation-for="CategoryName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TypeParameterId" class="form-label">
+            Transaction Type
+        </label>
+
+        <select asp-for="TypeParameterId"
+                asp-items="Model.TransactionTypes"
+                class="form-select">
+            <option value="">Select transaction type</option>
+        </select>
+
+        <span asp-validation-for="TypeParameterId"
+              class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Update</button>

@@ -28,7 +28,12 @@ namespace Monivo.Application.Features.Categories.Queries.GetCategoryById
             GetCategoryByIdQuery request,
             CancellationToken cancellationToken)
         {
-            var category = await _categoryRepository.GetByIdAsync(request.Id);
+            var category = await _categoryRepository
+       .GetByIdAndUserIdAsync(request.Id, request.UserId);
+
+            if (category == null)
+                return null;
+
 
             return _mapper.Map<CategoryDto>(category);
         }

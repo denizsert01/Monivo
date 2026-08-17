@@ -1,14 +1,17 @@
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Monivo.Application.Abstractions.Repositories;
 using Monivo.Application.Abstractions.Services;
 using Monivo.Application.Behaviours;
 using Monivo.Application.Features.Categories.Commands.CreateCategory;
 using Monivo.Application.Mappings;
+using Monivo.Domain.Entities;
 using Monivo.Persistence.Context;
 using Monivo.Persistence.Repositories;
 using Monivo.Persistence.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +26,24 @@ builder.Services.AddAutoMapper(cfg =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+// Cookie Authentication configuration
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+
+        options.ExpireTimeSpan = TimeSpan.FromHours(2);
+        options.SlidingExpiration = true;
+    });
+
+builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<IParameterRepository, ParameterRepository>();
 
 
 builder.Services.AddMediatR(cfg =>
@@ -67,6 +88,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

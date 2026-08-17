@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Monivo.Application.Abstractions.Repositories
 {
-    public interface ICategoryRepository : IRepository<Category>
+    public interface IUserRepository : IRepository<User>
     {
-        Task<List<Category>> GetByUserIdAsync(int userId);
-        Task<Category?> GetByIdAndUserIdAsync(int id, int userId);
+        Task<User?> GetByEmailAsync(string email);
     }
 }

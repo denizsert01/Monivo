@@ -17,7 +17,7 @@ namespace Monivo.Application.Features.Categories.Queries.GetAllCategories
         }
         public async Task<List<CategoryDto>> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var categories = await _categoryRepository.GetAllAsync();
+            var categories = await _categoryRepository.GetByUserIdAsync(request.UserId);
 
             return _mapper.Map<List<CategoryDto>>(categories);
         }
