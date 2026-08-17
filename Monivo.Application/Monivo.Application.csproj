@@ -14,7 +14,6 @@
     <Folder Include="Features\Authentication\Queries\" />
     <Folder Include="Features\Budgets\" />
     <Folder Include="Features\RecurringTransactions\" />
-    <Folder Include="Features\Transactions\" />
     <Folder Include="DependencyInjection\" />
   </ItemGroup>
 

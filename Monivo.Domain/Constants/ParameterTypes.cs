@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Monivo.Domain.Constants
 {
-    internal class ParameterTypes
+    public static class ParameterTypes
     {
+        public const string TransactionType = "TransactionType";
     }
 }

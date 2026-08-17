@@ -9,6 +9,7 @@ using Monivo.Application.Features.Categories.Commands.UpdateCategory;
 using Monivo.Application.Features.Categories.Queries.GetAllCategories;
 using Monivo.Application.Features.Categories.Queries.GetCategoryById;
 using Monivo.Application.Features.Parameters.Queries.GetByType;
+using Monivo.Domain.Constants;
 using Monivo.Web.ViewModels.Categories;
 using System.Security.Claims;
 
@@ -48,7 +49,7 @@ namespace Monivo.Web.Controllers
         public async Task<IActionResult> Create()
         {
             var types = await _mediator.Send(
-        new GetParametersByTypeQuery("TransactionType"));
+        new GetParametersByTypeQuery("ParameterTypes.TransactionType"));
 
             var model = new CreateCategoryViewModel
             {
@@ -68,7 +69,7 @@ namespace Monivo.Web.Controllers
             if (!ModelState.IsValid)
             {
                 var types = await _mediator.Send(
-                    new GetParametersByTypeQuery("TransactionType"));
+                    new GetParametersByTypeQuery(ParameterTypes.TransactionType));
 
                 model.TransactionTypes = types.Select(x => new SelectListItem
                 {
@@ -101,7 +102,7 @@ namespace Monivo.Web.Controllers
                 return NotFound();
 
             var types = await _mediator.Send(
-        new GetParametersByTypeQuery("TransactionType"));
+        new GetParametersByTypeQuery(ParameterTypes.TransactionType));
 
             var model = new EditCategoryViewModel
             {
@@ -125,7 +126,7 @@ namespace Monivo.Web.Controllers
             if (!ModelState.IsValid)
             {
                 var types = await _mediator.Send(
-                    new GetParametersByTypeQuery("TransactionType"));
+                    new GetParametersByTypeQuery(ParameterTypes.TransactionType));
 
                 model.TransactionTypes = types.Select(x => new SelectListItem
                 {

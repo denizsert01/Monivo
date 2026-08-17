@@ -44,7 +44,11 @@
                                asp-action="Index">
                                 Home
                             </a>
-                        </li>
+                        </li>                       
+
+                    </ul>
+
+                    <ul class="navbar-nav me-auto">
 
                         @if (User.Identity?.IsAuthenticated == true)
                         {
@@ -53,6 +57,14 @@
                                    asp-controller="Category"
                                    asp-action="Index">
                                     Categories
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                   asp-controller="Transaction"
+                                   asp-action="Index">
+                                    Transactions
                                 </a>
                             </li>
                         }
@@ -73,7 +85,8 @@
 
                                 <form asp-controller="Account"
                                       asp-action="Logout"
-                                      method="post">
+                                      method="post"
+                                      class="mb-0">
 
                                     <button type="submit"
                                             class="btn btn-outline-danger btn-sm">

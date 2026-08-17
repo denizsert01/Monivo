@@ -45,6 +45,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IParameterRepository, ParameterRepository>();
 
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 builder.Services.AddMediatR(cfg =>
 {
