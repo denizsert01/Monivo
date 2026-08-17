@@ -12,15 +12,109 @@
     <link rel="stylesheet"
           href="~/css/site.css"
           asp-append-version="true" />
+
+    <style>
+        body {
+            background: #fbfdfb;
+            color: #1f2d24;
+        }
+
+        .monivo-navbar {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom: 1px solid #e8efe9;
+            backdrop-filter: blur(12px);
+            padding: 14px 0;
+        }
+
+        .monivo-brand {
+            font-size: 1.35rem;
+            font-weight: 750;
+            color: #14251a !important;
+            letter-spacing: -0.5px;
+        }
+
+        .monivo-nav-link {
+            color: #6a766e !important;
+            font-weight: 500;
+            padding-left: 12px !important;
+            padding-right: 12px !important;
+            transition: color 0.2s ease;
+        }
+
+            .monivo-nav-link:hover {
+                color: #15803d !important;
+            }
+
+        .monivo-user {
+            color: #607066;
+            font-size: 0.9rem;
+        }
+
+        .monivo-auth-link {
+            color: #4f5e55 !important;
+            font-weight: 500;
+        }
+
+            .monivo-auth-link:hover {
+                color: #15803d !important;
+            }
+
+        .btn-monivo-register {
+            background: #15803d;
+            color: white !important;
+            border-radius: 10px;
+            padding: 7px 16px !important;
+            margin-left: 6px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+            .btn-monivo-register:hover {
+                background: #166534;
+                transform: translateY(-1px);
+            }
+
+        .btn-monivo-logout {
+            border: 1px solid #d7e4da;
+            background: #ffffff;
+            color: #166534;
+            border-radius: 9px;
+            padding: 6px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+            .btn-monivo-logout:hover {
+                background: #f0faf3;
+                border-color: #b9d9c1;
+            }
+
+        .main-container {
+            padding-top: 18px;
+            padding-bottom: 35px;
+        }
+
+        @@media (max-width: 768px) {
+            .monivo-user {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .btn-monivo-register {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom shadow-sm mb-3">
+        <nav class="navbar navbar-expand-lg monivo-navbar">
             <div class="container">
 
-                <a class="navbar-brand"
+                <a class="navbar-brand monivo-brand"
                    asp-controller="Home"
                    asp-action="Index">
                     Monivo
@@ -29,31 +123,30 @@
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent">
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse"
                      id="navbarSupportedContent">
 
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto align-items-lg-center">
 
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link monivo-nav-link"
                                asp-controller="Home"
                                asp-action="Index">
                                 Home
                             </a>
-                        </li>                       
-
-                    </ul>
-
-                    <ul class="navbar-nav me-auto">
+                        </li>
 
                         @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
-                                <a class="nav-link"
+                                <a class="nav-link monivo-nav-link"
                                    asp-controller="Category"
                                    asp-action="Index">
                                     Categories
@@ -61,7 +154,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link"
+                                <a class="nav-link monivo-nav-link"
                                    asp-controller="Transaction"
                                    asp-action="Index">
                                     Transactions
@@ -71,13 +164,13 @@
 
                     </ul>
 
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav align-items-lg-center">
 
                         @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <li class="nav-item d-flex align-items-center">
+                            <li class="nav-item d-flex align-items-center gap-3">
 
-                                <span class="navbar-text me-3">
+                                <span class="monivo-user">
                                     @User.FindFirst(
                                     System.Security.Claims.ClaimTypes.Email
                                                                 )?.Value
@@ -89,7 +182,7 @@
                                       class="mb-0">
 
                                     <button type="submit"
-                                            class="btn btn-outline-danger btn-sm">
+                                            class="btn-monivo-logout">
                                         Logout
                                     </button>
 
@@ -100,7 +193,7 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link"
+                                <a class="nav-link monivo-auth-link"
                                    asp-controller="Account"
                                    asp-action="Login">
                                     Login
@@ -108,7 +201,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link"
+                                <a class="nav-link btn-monivo-register"
                                    asp-controller="Account"
                                    asp-action="Register">
                                     Register
@@ -123,11 +216,9 @@
         </nav>
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-
+    <div class="container main-container">
+        <main role="main">
             @RenderBody()
-
         </main>
     </div>
 

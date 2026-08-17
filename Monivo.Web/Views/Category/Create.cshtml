@@ -4,41 +4,255 @@
     ViewData["Title"] = "Create Category";
 }
 
-<h2>Create Category</h2>
+<div class="category-page">
+    <div class="category-glow category-glow-one"></div>
+    <div class="category-glow category-glow-two"></div>
 
-<form asp-action="Create" method="post">
+    <div class="category-card">
 
-    <div class="mb-3">
-        <label asp-for="CategoryName" class="form-label">Category Name</label>
-        <input asp-for="CategoryName" class="form-control" />
-        <span asp-validation-for="CategoryName" class="text-danger"></span>
+        <div class="category-badge">
+            ✦ New Category
+        </div>
+
+        <h2 class="category-title">
+            Create a <span>category</span>
+        </h2>
+
+        <p class="category-subtitle">
+            Organize your transactions by creating a category and assigning its transaction type.
+        </p>
+
+        <form asp-action="Create" method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger category-alert"
+                 role="alert">
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CategoryName"
+                       class="form-label category-label">
+                    Category Name
+                </label>
+
+                <input asp-for="CategoryName"
+                       class="form-control category-input"
+                       placeholder="e.g. Salary, Groceries, Rent" />
+
+                <span asp-validation-for="CategoryName"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="TypeParameterId"
+                       class="form-label category-label">
+                    Transaction Type
+                </label>
+
+                <select asp-for="TypeParameterId"
+                        asp-items="Model.TransactionTypes"
+                        class="form-select category-input">
+
+                    <option value="">
+                        Select transaction type
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="TypeParameterId"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="category-actions">
+
+                <button type="submit"
+                        class="category-primary-button">
+                    Create Category
+                </button>
+
+                <a asp-action="Index"
+                   class="category-secondary-button">
+                    Back to Categories
+                </a>
+
+            </div>
+
+        </form>
 
     </div>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="TypeParameterId" class="form-label">
-            Transaction Type
-        </label>
+<style>
 
-        <select asp-for="TypeParameterId"
-                asp-items="Model.TransactionTypes"
-                class="form-select">
-            <option value="">Select transaction type</option>
-        </select>
+    .category-page {
+        position: relative;
+        min-height: 72vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding: 55px 20px;
+        border-radius: 28px;
+        background: radial-gradient( circle at 12% 20%, rgba(34, 197, 94, 0.17), transparent 34% ), radial-gradient( circle at 88% 80%, rgba(16, 185, 129, 0.14), transparent 35% ), linear-gradient( 135deg, #f8fff9 0%, #eefaf2 48%, #e8f8ef 100% );
+    }
 
-        <span asp-validation-for="TypeParameterId"
-              class="text-danger"></span>
-    </div>
+    .category-card {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 520px;
+        padding: 42px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 22px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 20px 55px rgba(30, 90, 55, 0.10);
+    }
 
-    <button type="submit" class="btn btn-success">
-        Save
-    </button>
+    .category-badge {
+        display: inline-block;
+        padding: 7px 14px;
+        margin-bottom: 20px;
+        background: #eefcf3;
+        border-radius: 999px;
+        color: #15803d;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
 
-    <a asp-action="Index" class="btn btn-secondary">
-        Back
-    </a>
+    .category-title {
+        margin-bottom: 10px;
+        color: #18251d;
+        font-size: 2rem;
+        font-weight: 750;
+        letter-spacing: -1px;
+    }
 
-</form>
+        .category-title span {
+            color: #16a34a;
+        }
+
+    .category-subtitle {
+        margin-bottom: 28px;
+        color: #718078;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .category-label {
+        margin-bottom: 7px;
+        color: #37483e;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .category-input {
+        min-height: 48px;
+        border: 1px solid #dce7df;
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .category-input:focus {
+            border-color: #86cf9c;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.10);
+        }
+
+    .category-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    .category-primary-button,
+    .category-secondary-button {
+        flex: 1;
+        padding: 12px 18px;
+        border-radius: 11px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .category-primary-button {
+        border: none;
+        background: #15803d;
+        color: white;
+        box-shadow: 0 10px 24px rgba(21, 128, 61, 0.18);
+    }
+
+        .category-primary-button:hover {
+            background: #166534;
+            transform: translateY(-1px);
+            box-shadow: 0 13px 28px rgba(21, 128, 61, 0.23);
+        }
+
+    .category-secondary-button {
+        border: 1px solid #cfe0d3;
+        background: white;
+        color: #166534;
+    }
+
+        .category-secondary-button:hover {
+            background: #f2fbf5;
+            border-color: #b9d8c0;
+            color: #14532d;
+            transform: translateY(-1px);
+        }
+
+    .category-alert {
+        border-radius: 10px;
+        font-size: 0.88rem;
+    }
+
+    .category-glow {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.48;
+        filter: blur(5px);
+    }
+
+    .category-glow-one {
+        width: 260px;
+        height: 260px;
+        top: -110px;
+        right: 8%;
+        background: rgba(74, 222, 128, 0.17);
+    }
+
+    .category-glow-two {
+        width: 290px;
+        height: 290px;
+        bottom: -145px;
+        left: 7%;
+        background: rgba(16, 185, 129, 0.14);
+    }
+
+    @@media (max-width: 576px) {
+
+        .category-page {
+            padding: 35px 15px;
+        }
+
+        .category-card {
+            padding: 30px 22px;
+        }
+
+        .category-actions {
+            flex-direction: column;
+        }
+
+        .category-title {
+            font-size: 1.7rem;
+        }
+    }
+
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -4,104 +4,319 @@
     ViewData["Title"] = "New Transaction";
 }
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+<div class="transaction-page">
+    <div class="transaction-glow transaction-glow-one"></div>
+    <div class="transaction-glow transaction-glow-two"></div>
 
-            <div class="card shadow-sm">
-                <div class="card-body p-4">
+    <div class="transaction-card">
 
-                    <h2 class="mb-4">New Transaction</h2>
+        <div class="transaction-badge">
+            ✦ New Transaction
+        </div>
 
-                    <form asp-action="Create" method="post">
+        <h2 class="transaction-title">
+            Add a <span>transaction</span>
+        </h2>
 
-                        <div asp-validation-summary="ModelOnly"
-                             class="text-danger mb-3">
-                        </div>
+        <p class="transaction-subtitle">
+            Record your income or expense and keep your financial history organized.
+        </p>
 
-                        <div class="mb-3">
-                            <label asp-for="CategoryId"
-                                   class="form-label">
-                                Category
-                            </label>
+        <form asp-action="Create" method="post">
 
-                            <select asp-for="CategoryId"
-                                    asp-items="Model.Categories"
-                                    class="form-select">
-                                <option value="">Select category</option>
-                            </select>
-
-                            <span asp-validation-for="CategoryId"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Amount"
-                                   class="form-label">
-                                Amount
-                            </label>
-
-                            <input asp-for="Amount"
-                                   class="form-control"
-                                   step="0.01" />
-
-                            <span asp-validation-for="Amount"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="TransactionDate"
-                                   class="form-label">
-                                Transaction Date
-                            </label>
-
-                            <input asp-for="TransactionDate"
-                                   type="date"
-                                   class="form-control" />
-
-                            <span asp-validation-for="TransactionDate"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Description"
-                                   class="form-label">
-                                Description
-                            </label>
-
-                            <textarea asp-for="Description"
-                                      class="form-control"
-                                      rows="3">
-                            </textarea>
-
-                            <span asp-validation-for="Description"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="d-flex gap-2">
-                            <button type="submit"
-                                    class="btn btn-primary">
-                                Save Transaction
-                            </button>
-
-                            <a asp-action="Index"
-                               class="btn btn-outline-secondary">
-                                Cancel
-                            </a>
-                        </div>
-
-                    </form>
-
-                </div>
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger transaction-alert"
+                 role="alert">
             </div>
 
-        </div>
+            <div class="mb-3">
+                <label asp-for="CategoryId"
+                       class="form-label transaction-label">
+                    Category
+                </label>
+
+                <select asp-for="CategoryId"
+                        asp-items="Model.Categories"
+                        class="form-select transaction-input">
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="CategoryId"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Amount"
+                       class="form-label transaction-label">
+                    Amount
+                </label>
+
+                <div class="amount-input-wrapper">
+
+                    <span class="amount-prefix">
+                        ₺
+                    </span>
+
+                    <input asp-for="Amount"
+                           class="form-control transaction-input amount-input"
+                           step="0.01"
+                           placeholder="0.00" />
+
+                </div>
+
+                <span asp-validation-for="Amount"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="TransactionDate"
+                       class="form-label transaction-label">
+                    Transaction Date
+                </label>
+
+                <input asp-for="TransactionDate"
+                       type="date"
+                       class="form-control transaction-input" />
+
+                <span asp-validation-for="TransactionDate"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Description"
+                       class="form-label transaction-label">
+                    Description
+                </label>
+
+                <textarea asp-for="Description"
+                          class="form-control transaction-input transaction-textarea"
+                          rows="3"
+                          placeholder="Optional note about this transaction...">
+                </textarea>
+
+                <span asp-validation-for="Description"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="transaction-actions">
+
+                <button type="submit"
+                        class="transaction-primary-button">
+                    Save Transaction
+                </button>
+
+                <a asp-action="Index"
+                   class="transaction-secondary-button">
+                    Back to Transactions
+                </a>
+
+            </div>
+
+        </form>
+
     </div>
 </div>
+
+<style>
+
+    .transaction-page {
+        position: relative;
+        min-height: 74vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding: 55px 20px;
+        border-radius: 28px;
+        background: radial-gradient( circle at 12% 18%, rgba(34, 197, 94, 0.17), transparent 34% ), radial-gradient( circle at 88% 82%, rgba(16, 185, 129, 0.14), transparent 35% ), linear-gradient( 135deg, #f8fff9 0%, #eefaf2 48%, #e8f8ef 100% );
+    }
+
+    .transaction-card {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 560px;
+        padding: 42px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 22px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 20px 55px rgba(30, 90, 55, 0.10);
+    }
+
+    .transaction-badge {
+        display: inline-block;
+        padding: 7px 14px;
+        margin-bottom: 20px;
+        background: #eefcf3;
+        border-radius: 999px;
+        color: #15803d;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .transaction-title {
+        margin-bottom: 10px;
+        color: #18251d;
+        font-size: 2rem;
+        font-weight: 750;
+        letter-spacing: -1px;
+    }
+
+        .transaction-title span {
+            color: #16a34a;
+        }
+
+    .transaction-subtitle {
+        margin-bottom: 28px;
+        color: #718078;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .transaction-label {
+        margin-bottom: 7px;
+        color: #37483e;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+    .transaction-input {
+        min-height: 48px;
+        border: 1px solid #dce7df;
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .transaction-input:focus {
+            border-color: #86cf9c;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.10);
+        }
+
+    .transaction-textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .amount-input-wrapper {
+        position: relative;
+    }
+
+    .amount-prefix {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        z-index: 2;
+        transform: translateY(-50%);
+        color: #647269;
+        font-weight: 600;
+    }
+
+    .amount-input {
+        padding-left: 38px;
+    }
+
+    .transaction-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    .transaction-primary-button,
+    .transaction-secondary-button {
+        flex: 1;
+        padding: 12px 18px;
+        border-radius: 11px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .transaction-primary-button {
+        border: none;
+        background: #15803d;
+        color: white;
+        box-shadow: 0 10px 24px rgba(21, 128, 61, 0.18);
+    }
+
+        .transaction-primary-button:hover {
+            background: #166534;
+            transform: translateY(-1px);
+            box-shadow: 0 13px 28px rgba(21, 128, 61, 0.23);
+        }
+
+    .transaction-secondary-button {
+        border: 1px solid #cfe0d3;
+        background: white;
+        color: #166534;
+    }
+
+        .transaction-secondary-button:hover {
+            background: #f2fbf5;
+            border-color: #b9d8c0;
+            color: #14532d;
+            transform: translateY(-1px);
+        }
+
+    .transaction-alert {
+        border-radius: 10px;
+        font-size: 0.88rem;
+    }
+
+    .transaction-glow {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.48;
+        filter: blur(5px);
+    }
+
+    .transaction-glow-one {
+        width: 260px;
+        height: 260px;
+        top: -110px;
+        right: 8%;
+        background: rgba(74, 222, 128, 0.17);
+    }
+
+    .transaction-glow-two {
+        width: 290px;
+        height: 290px;
+        bottom: -145px;
+        left: 7%;
+        background: rgba(16, 185, 129, 0.14);
+    }
+
+    @@media (max-width: 576px) {
+
+        .transaction-page {
+            padding: 35px 15px;
+        }
+
+        .transaction-card {
+            padding: 30px 22px;
+        }
+
+        .transaction-actions {
+            flex-direction: column;
+        }
+
+        .transaction-title {
+            font-size: 1.7rem;
+        }
+    }
+
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -46,10 +46,11 @@ namespace Monivo.Web.Controllers
             return View(categories);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
             var types = await _mediator.Send(
-        new GetParametersByTypeQuery("ParameterTypes.TransactionType"));
+                new GetParametersByTypeQuery(ParameterTypes.TransactionType));
 
             var model = new CreateCategoryViewModel
             {

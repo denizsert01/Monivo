@@ -4,84 +4,540 @@
     ViewData["Title"] = "Transactions";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="mb-1">Transactions</h2>
-        <p class="text-muted mb-0">
-            Manage your income and expenses.
-        </p>
-    </div>
+<div class="transaction-index-page">
 
-    <a asp-controller="Transaction"
-       asp-action="Create"
-       class="btn btn-primary">
-        New Transaction
-    </a>
+    <div class="transaction-glow transaction-glow-one"></div>
+    <div class="transaction-glow transaction-glow-two"></div>
+
+    <div class="transaction-index-content">
+
+        <div class="transaction-header">
+
+            <div>
+                <div class="transaction-badge">
+                    ✦ Transactions
+                </div>
+
+                <h2 class="transaction-title">
+                    Manage your <span>transactions</span>
+                </h2>
+
+                <p class="transaction-subtitle">
+                    Keep track of your income and expenses in one clear financial history.
+                </p>
+            </div>
+
+            <a asp-controller="Transaction"
+               asp-action="Create"
+               class="create-transaction-button">
+                <span class="plus-icon">+</span>
+                New Transaction
+            </a>
+
+        </div>
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    ↕
+                </div>
+
+                <h4>No transactions yet</h4>
+
+                <p>
+                    Add your first income or expense to start building your financial history.
+                </p>
+
+                <a asp-controller="Transaction"
+                   asp-action="Create"
+                   class="empty-create-button">
+                    Add your first transaction
+                </a>
+
+            </div>
+        }
+        else
+        {
+            <div class="transaction-table-card">
+
+                <div class="table-responsive">
+
+                    <table class="table transaction-table">
+
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var transaction in Model)
+                            {
+                                var isIncome =
+                                transaction.TransactionType?.Equals(
+                                "Income",
+                                StringComparison.OrdinalIgnoreCase
+                                ) == true;
+
+                                <tr>
+
+                                    <td>
+                                        <span class="transaction-date">
+                                            @transaction.TransactionDate.ToString("dd.MM.yyyy")
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <div class="category-cell">
+
+                                            <div class="category-icon">
+                                                ◎
+                                            </div>
+
+                                            <span>
+                                                @transaction.CategoryName
+                                            </span>
+
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        @if (isIncome)
+                                        {
+                                            <span class="type-badge income-badge">
+                                                ↗ Income
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="type-badge expense-badge">
+                                                ↘ Expense
+                                            </span>
+                                        }
+                                </td>
+
+                                <td>
+                                    <span class="description-text">
+                                        @(string.IsNullOrWhiteSpace(transaction.Description)
+                                                                            ? "-"
+                                                                            : transaction.Description)
+                                </span>
+                            </td>
+
+                                    <td>
+                                @if (isIncome)
+                                        {
+                                            <span class="amount income-amount">
+                                                +₺@transaction.Amount.ToString("N2")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="amount expense-amount">
+                                                -₺@transaction.Amount.ToString("N2")
+                                            </span>
+                                        }
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <div class="transaction-actions">
+
+                                            <a asp-action="Edit"
+                                               asp-route-id="@transaction.Id"
+                                               class="edit-button">
+                                                Edit
+                                            </a>
+
+                                            <a asp-action="Delete"
+                                               asp-route-id="@transaction.Id"
+                                               class="delete-button">
+                                                Delete
+                                            </a>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="transaction-footer-info">
+                <span>
+                    @Model.Count @(Model.Count == 1 ? "transaction" : "transactions")
+                </span>
+            </div>
+        }
+
+    </div>
 </div>
 
-@if (Model == null || !Model.Any())
-{
-    <div class="alert alert-light border">
-        No transactions found yet.
-    </div>
-}
-else
-{
-    <div class="table-responsive">
-        <table class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th class="text-end">Actions</th>
-                </tr>
-            </thead>
+<style>
 
-            <tbody>
-                @foreach (var transaction in Model)
-                {
-                    <tr>
-                        <td>
-                            @transaction.TransactionDate.ToString("dd.MM.yyyy")
-                        </td>
+    .transaction-index-page {
+        position: relative;
+        min-height: 72vh;
+        overflow: hidden;
+        padding: 55px;
+        border-radius: 28px;
+        background: radial-gradient( circle at 12% 15%, rgba(34, 197, 94, 0.17), transparent 34% ), radial-gradient( circle at 90% 85%, rgba(16, 185, 129, 0.14), transparent 35% ), linear-gradient( 135deg, #f8fff9 0%, #eefaf2 48%, #e8f8ef 100% );
+    }
 
-                        <td>
-                            @transaction.CategoryName
-                        </td>
+    .transaction-index-content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 1150px;
+        margin: 0 auto;
+    }
 
-                        <td>
-                            @transaction.TransactionType
-                        </td>
+    .transaction-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
 
-                        <td>
-                            @(string.IsNullOrWhiteSpace(transaction.Description)
-                                                ? "-"
-                                                : transaction.Description)
-                </td>
+    .transaction-badge {
+        display: inline-block;
+        padding: 7px 14px;
+        margin-bottom: 16px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(22, 101, 52, 0.10);
+        border-radius: 999px;
+        color: #15803d;
+        font-size: 0.8rem;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+    }
 
-                        <td>
-                            @transaction.Amount.ToString("N2")
-                        </td>
+    .transaction-title {
+        margin-bottom: 8px;
+        color: #18251d;
+        font-size: 2.3rem;
+        font-weight: 750;
+        letter-spacing: -1.5px;
+    }
 
-                        <td class="text-end">
-                            <a asp-action="Edit"
-                               asp-route-id="@transaction.Id"
-                               class="btn btn-sm btn-outline-secondary">
-                                Edit
-                            </a>
+        .transaction-title span {
+            color: #16a34a;
+        }
 
-                            <a asp-action="Delete"
-                               asp-route-id="@transaction.Id"
-                               class="btn btn-sm btn-outline-danger">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                        }
-            </tbody>
-        </table>
-    </div>
-}
+    .transaction-subtitle {
+        max-width: 620px;
+        margin: 0;
+        color: #718078;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .create-transaction-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        flex-shrink: 0;
+        padding: 12px 19px;
+        border-radius: 11px;
+        background: #15803d;
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 10px 24px rgba(21, 128, 61, 0.18);
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .create-transaction-button:hover {
+            background: #166534;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(21, 128, 61, 0.23);
+        }
+
+    .plus-icon {
+        font-size: 1.15rem;
+        line-height: 1;
+    }
+
+    .transaction-table-card {
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.90);
+        border-radius: 18px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 18px 45px rgba(30, 90, 55, 0.08);
+    }
+
+    .transaction-table {
+        margin-bottom: 0;
+    }
+
+        .transaction-table thead {
+            background: rgba(241, 250, 244, 0.8);
+        }
+
+        .transaction-table th {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e4ece6;
+            color: #68766d;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .transaction-table td {
+            padding: 17px 20px;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf2ee;
+            color: #334139;
+        }
+
+        .transaction-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .transaction-table tbody tr {
+            transition: background 0.2s ease;
+        }
+
+            .transaction-table tbody tr:hover {
+                background: rgba(240, 253, 244, 0.65);
+            }
+
+    .transaction-date {
+        color: #5f6e64;
+        font-size: 0.88rem;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+
+    .category-cell {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .category-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+        height: 35px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: #dcfce7;
+        color: #15803d;
+        font-weight: 700;
+    }
+
+    .type-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .income-badge {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+    }
+
+    .expense-badge {
+        background: #fff1f2;
+        color: #be123c;
+        border: 1px solid #fecdd3;
+    }
+
+    .description-text {
+        display: inline-block;
+        max-width: 260px;
+        color: #66746c;
+        font-size: 0.88rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .amount {
+        font-size: 0.95rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    .income-amount {
+        color: #15803d;
+    }
+
+    .expense-amount {
+        color: #dc2626;
+    }
+
+    .transaction-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    .edit-button,
+    .delete-button {
+        display: inline-block;
+        padding: 7px 14px;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .edit-button {
+        background: #f0faf3;
+        border: 1px solid #cfe7d5;
+        color: #166534;
+    }
+
+        .edit-button:hover {
+            background: #dcfce7;
+            border-color: #b8ddc2;
+            color: #14532d;
+            transform: translateY(-1px);
+        }
+
+    .delete-button {
+        background: #fff7f7;
+        border: 1px solid #f3d0d0;
+        color: #b91c1c;
+    }
+
+        .delete-button:hover {
+            background: #fee2e2;
+            border-color: #fecaca;
+            color: #991b1b;
+            transform: translateY(-1px);
+        }
+
+    .transaction-footer-info {
+        margin-top: 15px;
+        color: #829087;
+        font-size: 0.82rem;
+        text-align: right;
+    }
+
+    .empty-state {
+        padding: 65px 25px;
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(255, 255, 255, 0.90);
+        border-radius: 18px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 18px 45px rgba(30, 90, 55, 0.07);
+        text-align: center;
+    }
+
+    .empty-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 55px;
+        height: 55px;
+        margin: 0 auto 18px;
+        border-radius: 15px;
+        background: #dcfce7;
+        color: #15803d;
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    .empty-state h4 {
+        color: #26362c;
+        font-weight: 700;
+    }
+
+    .empty-state p {
+        max-width: 450px;
+        margin: 8px auto 22px;
+        color: #77847c;
+    }
+
+    .empty-create-button {
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: 10px;
+        background: #15803d;
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+        .empty-create-button:hover {
+            background: #166534;
+            color: white;
+        }
+
+    .transaction-glow {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.48;
+        filter: blur(5px);
+    }
+
+    .transaction-glow-one {
+        width: 280px;
+        height: 280px;
+        top: -130px;
+        right: 5%;
+        background: rgba(74, 222, 128, 0.17);
+    }
+
+    .transaction-glow-two {
+        width: 320px;
+        height: 320px;
+        bottom: -160px;
+        left: 4%;
+        background: rgba(16, 185, 129, 0.14);
+    }
+
+    @@media (max-width: 900px) {
+
+        .transaction-index-page {
+            padding: 35px 20px;
+        }
+
+        .transaction-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .create-transaction-button {
+            width: 100%;
+        }
+
+        .transaction-title {
+            font-size: 1.9rem;
+        }
+    }
+
+</style>

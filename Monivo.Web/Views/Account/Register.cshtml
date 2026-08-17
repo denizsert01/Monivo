@@ -4,115 +4,322 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm">
-                <div class="card-body p-4">
+<div class="auth-page">
+    <div class="auth-glow auth-glow-one"></div>
+    <div class="auth-glow auth-glow-two"></div>
 
-                    <h2 class="text-center mb-4">Create Account</h2>
+    <div class="auth-card auth-card-wide">
 
-                    <form asp-controller="Account"
-                          asp-action="Register"
-                          method="post">
-
-                        <div asp-validation-summary="ModelOnly"
-                             class="text-danger mb-3">
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="UserName"
-                                   class="form-label">
-                                Name
-                            </label>
-
-                            <input asp-for="UserName"
-                                   class="form-control" />
-
-                            <span asp-validation-for="UserName"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="UserSurname"
-                                   class="form-label">
-                                Surname
-                            </label>
-
-                            <input asp-for="UserSurname"
-                                   class="form-control" />
-
-                            <span asp-validation-for="UserSurname"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="BirthDate"
-                                   class="form-label">
-                                Birth Date
-                            </label>
-
-                            <input asp-for="BirthDate"
-                                   type="date"
-                                   class="form-control" />
-
-                            <span asp-validation-for="BirthDate"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Email"
-                                   class="form-label">
-                                Email
-                            </label>
-
-                            <input asp-for="Email"
-                                   type="email"
-                                   class="form-control" />
-
-                            <span asp-validation-for="Email"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Password"
-                                   class="form-label">
-                                Password
-                            </label>
-
-                            <input asp-for="Password"
-                                   type="password"
-                                   class="form-control" />
-
-                            <span asp-validation-for="Password"
-                                  class="text-danger">
-                            </span>
-                        </div>
-
-                        <button type="submit"
-                                class="btn btn-primary w-100">
-                            Register
-                        </button>
-
-                    </form>
-
-                    <div class="text-center mt-3">
-                        <span>Already have an account?</span>
-                        <a asp-controller="Account"
-                           asp-action="Login">
-                            Login
-                        </a>
-                    </div>
-
-                </div>
-            </div>
+        <div class="auth-badge">
+            ✦ Join Monivo
         </div>
+
+        <h2 class="auth-title">
+            Create your <span>account</span>
+        </h2>
+
+        <p class="auth-subtitle">
+            Start tracking your finances and building better financial habits.
+        </p>
+
+        <form asp-controller="Account"
+              asp-action="Register"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="alert alert-danger auth-alert"
+                 role="alert">
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="UserName"
+                           class="form-label auth-label">
+                        Name
+                    </label>
+
+                    <input asp-for="UserName"
+                           class="form-control auth-input"
+                           placeholder="Your name" />
+
+                    <span asp-validation-for="UserName"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="UserSurname"
+                           class="form-label auth-label">
+                        Surname
+                    </label>
+
+                    <input asp-for="UserSurname"
+                           class="form-control auth-input"
+                           placeholder="Your surname" />
+
+                    <span asp-validation-for="UserSurname"
+                          class="text-danger small">
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="BirthDate"
+                       class="form-label auth-label">
+                    Birth Date
+                </label>
+
+                <input asp-for="BirthDate"
+                       type="date"
+                       class="form-control auth-input" />
+
+                <span asp-validation-for="BirthDate"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email"
+                       class="form-label auth-label">
+                    Email
+                </label>
+
+                <input asp-for="Email"
+                       type="email"
+                       class="form-control auth-input"
+                       placeholder="you@example.com" />
+
+                <span asp-validation-for="Email"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Password"
+                       class="form-label auth-label">
+                    Password
+                </label>
+
+                <input asp-for="Password"
+                       type="password"
+                       class="form-control auth-input"
+                       placeholder="Create a secure password" />
+
+                <span asp-validation-for="Password"
+                      class="text-danger small">
+                </span>
+            </div>
+
+            <button type="submit"
+                    class="auth-primary-button">
+                Create Account
+            </button>
+
+        </form>
+
+        <div class="auth-divider">
+            <span></span>
+            <small>Already have an account?</small>
+            <span></span>
+        </div>
+
+        <a asp-controller="Account"
+           asp-action="Login"
+           class="auth-secondary-button">
+            Login to Monivo
+        </a>
+
     </div>
 </div>
+
+<style>
+
+    .auth-page {
+        position: relative;
+        min-height: 76vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 28px;
+        padding: 55px 20px;
+        background: radial-gradient( circle at 15% 15%, rgba(34, 197, 94, 0.18), transparent 34% ), radial-gradient( circle at 85% 85%, rgba(16, 185, 129, 0.16), transparent 35% ), linear-gradient( 135deg, #f8fff9 0%, #eefaf2 48%, #e8f8ef 100% );
+    }
+
+    .auth-card {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 470px;
+        padding: 42px;
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        border-radius: 22px;
+        backdrop-filter: blur(14px);
+        box-shadow: 0 20px 55px rgba(30, 90, 55, 0.10);
+        text-align: center;
+    }
+
+    .auth-card-wide {
+        max-width: 560px;
+    }
+
+    .auth-badge {
+        display: inline-block;
+        padding: 7px 14px;
+        margin-bottom: 20px;
+        border-radius: 999px;
+        background: #eefcf3;
+        color: #15803d;
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .auth-title {
+        margin-bottom: 10px;
+        color: #18251d;
+        font-size: 2rem;
+        font-weight: 750;
+        letter-spacing: -1px;
+    }
+
+        .auth-title span {
+            color: #16a34a;
+        }
+
+    .auth-subtitle {
+        max-width: 430px;
+        margin: 0 auto 28px;
+        color: #718078;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .auth-label {
+        display: block;
+        margin-bottom: 7px;
+        color: #37483e;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .auth-input {
+        min-height: 48px;
+        border: 1px solid #dce7df;
+        border-radius: 11px;
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .auth-input:focus {
+            border-color: #86cf9c;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.10);
+        }
+
+    .auth-primary-button {
+        width: 100%;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 11px;
+        background: #15803d;
+        color: white;
+        font-weight: 600;
+        transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 10px 24px rgba(21, 128, 61, 0.18);
+    }
+
+        .auth-primary-button:hover {
+            background: #166534;
+            transform: translateY(-1px);
+            box-shadow: 0 13px 28px rgba(21, 128, 61, 0.23);
+        }
+
+    .auth-secondary-button {
+        display: block;
+        width: 100%;
+        padding: 11px 20px;
+        border: 1px solid #cfe0d3;
+        border-radius: 11px;
+        background: white;
+        color: #166534;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+        .auth-secondary-button:hover {
+            background: #f2fbf5;
+            border-color: #b9d8c0;
+            color: #14532d;
+        }
+
+    .auth-divider {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 24px 0 18px;
+    }
+
+        .auth-divider span {
+            flex: 1;
+            height: 1px;
+            background: #dfe8e2;
+        }
+
+        .auth-divider small {
+            color: #849087;
+            white-space: nowrap;
+        }
+
+    .auth-alert {
+        border-radius: 10px;
+        font-size: 0.88rem;
+        text-align: left;
+    }
+
+    .auth-glow {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.48;
+        filter: blur(5px);
+    }
+
+    .auth-glow-one {
+        width: 260px;
+        height: 260px;
+        top: -110px;
+        right: 9%;
+        background: rgba(74, 222, 128, 0.17);
+    }
+
+    .auth-glow-two {
+        width: 290px;
+        height: 290px;
+        bottom: -145px;
+        left: 8%;
+        background: rgba(16, 185, 129, 0.14);
+    }
+
+    @@media (max-width: 576px) {
+
+        .auth-page {
+            padding: 35px 15px;
+        }
+
+        .auth-card {
+            padding: 30px 22px;
+        }
+
+        .auth-title {
+            font-size: 1.7rem;
+        }
+    }
+
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
