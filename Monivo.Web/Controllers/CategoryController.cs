@@ -4,10 +4,7 @@ using Monivo.Application.Abstractions.Services;
 using Monivo.Application.Features.Categories.Commands.CreateCategory;
 using Monivo.Application.Features.Categories.Commands.DeleteCategory;
 using Monivo.Application.Features.Categories.Commands.UpdateCategory;
-using Monivo.Application.Features.Categories.Queries;
 using Monivo.Application.Features.Categories.Queries.GetAllCategories;
-using Monivo.Domain.Entities;
-using System.Threading.Tasks;
 
 namespace Monivo.Web.Controllers
 {
@@ -22,6 +19,7 @@ namespace Monivo.Web.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var categories = await _mediator.Send(new GetAllCategoriesQuery());

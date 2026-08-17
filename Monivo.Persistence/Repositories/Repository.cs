@@ -2,11 +2,6 @@
 using Monivo.Application.Abstractions.Repositories;
 using Monivo.Domain.Common;
 using Monivo.Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monivo.Persistence.Repositories
 {
@@ -15,7 +10,7 @@ namespace Monivo.Persistence.Repositories
         private readonly MonivoDbContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(MonivoDbContext context, DbSet<T> dbSet)
+        public Repository(MonivoDbContext context)
         {
             _context = context;
             _dbSet = _context.Set<T>();

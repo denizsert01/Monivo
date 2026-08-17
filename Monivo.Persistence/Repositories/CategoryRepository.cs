@@ -12,7 +12,7 @@ namespace Monivo.Persistence.Repositories
 {
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
-        public CategoryRepository(MonivoDbContext context, DbSet<Category> dbSet) : base(context, dbSet)
+        public CategoryRepository(MonivoDbContext context) : base(context)
         {
         }
     }

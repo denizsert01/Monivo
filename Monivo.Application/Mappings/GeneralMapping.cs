@@ -2,12 +2,8 @@
 using Monivo.Application.DTOs.Categories;
 using Monivo.Application.Features.Categories.Commands.CreateCategory;
 using Monivo.Application.Features.Categories.Commands.UpdateCategory;
+using Monivo.Application.Features.Categories.Queries.GetAllCategories;
 using Monivo.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monivo.Application.Mappings
 {
@@ -15,7 +11,7 @@ namespace Monivo.Application.Mappings
     {
         public GeneralMapping()
         {
-            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Category, Features.Categories.Queries.GetAllCategories.CategoryDto>().ReverseMap();
             CreateMap<Category, CreateCategoryDto>().ReverseMap();
             CreateMap<Category, UpdateCategoryDto>().ReverseMap();
             CreateMap<CreateCategoryCommand, Category>().ReverseMap();
